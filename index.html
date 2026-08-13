@@ -1,25 +1,930 @@
-My Resume
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Roozbehani — Embedded Systems Engineer &amp; Researcher</title>
+<meta name="description" content="Academic &amp; professional résumé of Ali Roozbehani — Embedded Systems Engineer, RTOS &amp; Linux UI developer, BCI researcher.">
 
+<!--
+=====================================================================
+  HOW THIS FILE IS ORGANIZED (read this if you are new to editing HTML)
+=====================================================================
+  1. FONTS + STYLE  -> everything inside the big <style> tag below.
+  2. CONTENT        -> everything inside <body>, split into <section>
+                        blocks, each with a big comment banner such as
+                        "SECTION: SKILLS" marking where it starts.
+  3. SCRIPT         -> a small <script> block at the very bottom that
+                        makes the menu, the skill tiles, and the
+                        "Download PDF" button work.
 
-    Your Name
-    Email: your.email@example.com | LinkedIn: linkedin.com/in/yourname
-    
-    
-        Summary
-        Brief professional summary or elevator pitch goes here.
-    
+  To change TEXT: just find the words in the HTML and type over them.
+  To change a LINK: find the "href" (a web link) or "mailto:" /
+  "tel:" value and replace it with yours.
+  To change COLORS: scroll to the ":root" block near the top of the
+  <style> section and edit the hex codes (e.g. #0b6e66).
+  Search (Ctrl/Cmd+F) for "EDIT:" comments — those mark the spots
+  you are most likely to want to personalize first.
+=====================================================================
+-->
 
-    
-        Experience
-        Job Title — Company Name
-        Month Year – Present
-        
-            Key achievement or responsibility 1.
-            Key achievement or responsibility 2.
-        
-    
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    
-        Education
-        B.S. Computer Science — University Name (2020 - 2024)
+<style>
+/* =====================================================================
+   1. DESIGN TOKENS — EDIT: change these hex values to re-theme the page
+   ===================================================================== */
+:root{
+  --bg:            #f2f8f7;   /* page background — light mint */
+  --surface:       #ffffff;   /* card background */
+  --surface-alt:   #e9f4f2;   /* soft teal panel background */
+  --ink:           #0f2e2b;   /* primary text */
+  --ink-soft:      #47615d;   /* secondary text */
+  --ink-faint:     #7b938f;   /* tertiary / meta text */
+  --primary:       #0b6e66;   /* deep teal — headings, icons */
+  --primary-dark:  #084f4a;   /* darker teal — hero, header */
+  --primary-light: #17a398;   /* bright teal accent */
+  --accent:        #2f7cae;   /* blue accent — links, hover */
+  --line:          #d7e6e3;   /* hairline borders/dividers */
+  --gold:          #b98a2e;   /* small highlight for patents/honors */
+  --radius:        14px;
+  --radius-sm:     8px;
+  --shadow:        0 10px 30px -12px rgba(8,79,74,0.18);
+  --shadow-sm:     0 4px 14px -8px rgba(8,79,74,0.22);
+  --font-display:  'Space Grotesk', sans-serif;
+  --font-body:     'IBM Plex Sans', sans-serif;
+  --font-mono:     'IBM Plex Mono', monospace;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:var(--accent); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+h1,h2,h3,h4{ font-family:var(--font-display); color:var(--primary-dark); margin:0 0 .4em; line-height:1.2; }
+ul{ margin:0; padding:0; list-style:none; }
+button{ font-family:var(--font-body); cursor:pointer; }
+:focus-visible{ outline:3px solid var(--accent); outline-offset:3px; }
+
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--primary-light);
+  font-weight:500;
+}
+.section-head{ max-width:640px; margin:0 auto 2.6rem; text-align:center; }
+.section-head h2{ font-size:clamp(1.6rem,3vw,2.1rem); }
+.section-head p{ color:var(--ink-soft); font-size:1.02rem; }
+
+section{ padding:5rem 1.5rem; }
+.wrap{ max-width:1080px; margin:0 auto; }
+
+/* =====================================================================
+   HEADER / NAV
+   ===================================================================== */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(242,248,247,0.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  max-width:1080px; margin:0 auto; padding:.85rem 1.5rem;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.nav-brand{
+  display:flex; align-items:center; gap:.6rem;
+  font-family:var(--font-display); font-weight:700; color:var(--primary-dark);
+  font-size:1.05rem;
+}
+.nav-brand .mark{
+  width:34px; height:34px; border-radius:9px;
+  background:linear-gradient(145deg,var(--primary-light),var(--primary-dark));
+  color:#fff; display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-mono); font-size:.85rem; font-weight:500;
+}
+.nav-links{ display:flex; gap:1.7rem; }
+.nav-links a{
+  color:var(--ink-soft); font-size:.92rem; font-weight:500;
+}
+.nav-links a:hover{ color:var(--primary); text-decoration:none; }
+.nav-toggle{
+  display:none; background:none; border:none; padding:.4rem;
+}
+.nav-toggle svg{ width:24px; height:24px; color:var(--primary-dark); }
+
+/* =====================================================================
+   HERO
+   ===================================================================== */
+.hero{ padding:0 0 4.5rem; }
+.hero-cover{
+  position:relative; height:min(46vw,320px); min-height:190px;
+  overflow:hidden;
+  background:linear-gradient(120deg,#e8f5f3,#d4ece7 55%,#c3e6e0);
+}
+.hero-cover svg.trace-pattern{ position:absolute; inset:0; width:100%; height:100%; opacity:.55; }
+.hero-inner{
+  max-width:1080px; margin:0 auto; padding:0 1.5rem;
+  position:relative;
+}
+.hero-card{
+  display:flex; align-items:flex-end; gap:1.6rem;
+  margin-top:-64px;
+  flex-wrap:wrap;
+}
+.avatar{
+  width:132px; height:132px; border-radius:50%;
+  border:5px solid var(--bg);
+  background:var(--surface);
+  box-shadow:var(--shadow);
+  flex-shrink:0;
+}
+.hero-text{ padding-bottom:.4rem; flex:1; min-width:240px; }
+.hero-text h1{ font-size:clamp(1.9rem,4vw,2.6rem); margin-bottom:.15rem; }
+.hero-role{ font-size:1.06rem; color:var(--primary); font-weight:500; margin-bottom:.5rem; }
+.hero-meta{
+  display:flex; flex-wrap:wrap; gap:1.1rem;
+  font-size:.88rem; color:var(--ink-soft); font-family:var(--font-mono);
+}
+.hero-meta span{ display:inline-flex; align-items:center; gap:.35rem; }
+.hero-meta svg{ width:15px; height:15px; color:var(--primary-light); }
+.hero-cta{ display:flex; gap:.7rem; padding-bottom:.5rem; flex-wrap:wrap; }
+
+.btn{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.68rem 1.15rem; border-radius:999px;
+  font-size:.88rem; font-weight:600; border:1.5px solid transparent;
+  font-family:var(--font-body);
+}
+.btn svg{ width:16px; height:16px; }
+.btn-primary{ background:var(--primary); color:#fff; }
+.btn-primary:hover{ background:var(--primary-dark); text-decoration:none; }
+.btn-ghost{ border-color:var(--primary); color:var(--primary-dark); background:transparent; }
+.btn-ghost:hover{ background:var(--surface-alt); text-decoration:none; }
+
+/* =====================================================================
+   ABOUT
+   ===================================================================== */
+#about{ background:var(--surface); }
+.about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:2.5rem; align-items:start; }
+.about-text p{ color:var(--ink-soft); margin:0 0 1rem; }
+.about-facts{
+  background:var(--surface-alt); border:1px solid var(--line);
+  border-radius:var(--radius); padding:1.5rem;
+  display:grid; gap:1rem;
+}
+.fact{ display:flex; gap:.8rem; align-items:flex-start; }
+.fact svg{ width:19px; height:19px; color:var(--primary); flex-shrink:0; margin-top:.15rem; }
+.fact b{ display:block; font-family:var(--font-mono); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); font-weight:500; }
+.fact span{ color:var(--ink); font-size:.94rem; }
+
+/* =====================================================================
+   SKILLS — clickable flip tiles
+   ===================================================================== */
+.skills-group{ margin-bottom:2.4rem; }
+.skills-group h3{
+  font-size:.98rem; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--ink-soft); font-family:var(--font-mono); font-weight:500;
+  margin-bottom:1rem; display:flex; align-items:center; gap:.6rem;
+}
+.skills-group h3::after{ content:""; flex:1; height:1px; background:var(--line); }
+.tile-grid{
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:.9rem;
+}
+.skill-tile{
+  position:relative; height:118px; perspective:1000px;
+  border-radius:var(--radius-sm);
+}
+.skill-tile-inner{
+  position:relative; width:100%; height:100%;
+  transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  transform-style:preserve-3d;
+  border-radius:var(--radius-sm);
+}
+.skill-tile.flipped .skill-tile-inner{ transform:rotateY(180deg); }
+.skill-tile-front,.skill-tile-back{
+  position:absolute; inset:0; backface-visibility:hidden;
+  border-radius:var(--radius-sm);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:.7rem; gap:.5rem;
+  border:1px solid var(--line);
+}
+.skill-tile-front{
+  background:var(--surface);
+  box-shadow:var(--shadow-sm);
+}
+.skill-tile-front svg{ width:26px; height:26px; color:var(--primary); }
+.skill-tile-front span{ font-size:.82rem; font-weight:600; color:var(--ink); }
+.skill-tile-back{
+  background:var(--primary-dark);
+  color:#eafaf7; transform:rotateY(180deg);
+  font-family:var(--font-mono); font-size:.74rem; line-height:1.45;
+}
+.skill-tile:hover .skill-tile-front{ border-color:var(--primary-light); }
+.skill-tile{ cursor:pointer; }
+.tile-hint{ text-align:center; color:var(--ink-faint); font-size:.82rem; margin-top:1.6rem; font-family:var(--font-mono); }
+
+/* =====================================================================
+   TIMELINE (Experience / Projects / Publications) — PCB-trace signature
+   ===================================================================== */
+#experience{ background:var(--surface); }
+.timeline{ position:relative; padding-left:0; margin-top:1rem; }
+.timeline::before{
+  content:""; position:absolute; left:19px; top:6px; bottom:6px; width:2px;
+  background:repeating-linear-gradient(to bottom,var(--primary-light) 0 6px, transparent 6px 10px);
+}
+.t-item{ position:relative; padding-left:56px; margin-bottom:2.1rem; }
+.t-item:last-child{ margin-bottom:0; }
+.t-node{
+  position:absolute; left:8px; top:2px; width:24px; height:24px; border-radius:50%;
+  background:var(--surface);
+  border:3px solid var(--primary);
+  box-shadow:0 0 0 4px var(--bg);
+}
+#experience .t-node{ box-shadow:0 0 0 4px var(--surface); }
+.t-item::after{
+  content:""; position:absolute; left:32px; top:13px; width:24px; height:2px;
+  background:var(--primary-light);
+}
+.t-card{
+  background:var(--surface-alt); border:1px solid var(--line);
+  border-radius:var(--radius); padding:1.15rem 1.35rem;
+}
+#experience .t-card{ background:var(--bg); }
+.t-top{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:.6rem; align-items:baseline; margin-bottom:.35rem; }
+.t-top h3{ font-size:1.06rem; margin:0; }
+.t-date{ font-family:var(--font-mono); font-size:.78rem; color:var(--primary); white-space:nowrap; }
+.t-org{ color:var(--ink-soft); font-size:.9rem; margin-bottom:.55rem; font-weight:500; }
+.t-card p{ color:var(--ink-soft); font-size:.93rem; margin:.3rem 0; }
+.t-card ul{ margin-top:.5rem; }
+.t-card ul li{
+  color:var(--ink-soft); font-size:.9rem; padding-left:1.1rem; position:relative; margin-bottom:.3rem;
+}
+.t-card ul li::before{
+  content:""; position:absolute; left:0; top:.55em; width:5px; height:5px; border-radius:1px; background:var(--primary-light);
+}
+.badge{
+  display:inline-block; font-family:var(--font-mono); font-size:.68rem; font-weight:500;
+  letter-spacing:.03em; padding:.22rem .55rem; border-radius:5px;
+  background:var(--surface); border:1px solid var(--line); color:var(--ink-soft);
+  margin-right:.4rem;
+}
+.badge.patent{ background:#fbf1de; border-color:#e9d29e; color:var(--gold); }
+.badge.oral{ background:#eaf3fb; border-color:#c7dff2; color:var(--accent); }
+.badge.poster{ background:#eaf7f4; border-color:#c3e8de; color:var(--primary); }
+.badge.progress{ background:#fdeeee; border-color:#f0cccc; color:#b4453f; }
+
+/* =====================================================================
+   EDUCATION / CERTIFICATIONS
+   ===================================================================== */
+.edu-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.3rem; }
+.edu-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+  padding:1.4rem 1.5rem; box-shadow:var(--shadow-sm);
+}
+.edu-card .t-date{ display:block; margin-bottom:.3rem; }
+.edu-card h3{ font-size:1.05rem; margin-bottom:.15rem; }
+.edu-card .t-org{ margin-bottom:.7rem; }
+.edu-card .gpa{
+  font-family:var(--font-mono); font-size:.78rem; color:var(--primary);
+  background:var(--surface-alt); display:inline-block; padding:.2rem .55rem; border-radius:5px; margin-top:.6rem;
+}
+.cert-cloud{ display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; }
+.cert-chip{
+  font-family:var(--font-mono); font-size:.8rem; color:var(--primary-dark);
+  background:var(--surface-alt); border:1px solid var(--line); border-radius:999px;
+  padding:.45rem 1rem;
+}
+
+/* =====================================================================
+   BEYOND WORK (hobbies + honors)
+   ===================================================================== */
+#beyond{ background:var(--surface); }
+.beyond-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; }
+.honor-card{
+  background:linear-gradient(135deg,#fbf6e8,#f7efd6);
+  border:1px solid #ecdfae; border-radius:var(--radius); padding:1.4rem;
+  display:flex; gap:1rem; align-items:flex-start;
+}
+.honor-card svg{ width:26px; height:26px; color:var(--gold); flex-shrink:0; }
+.honor-card p{ margin:0; color:#5c4a1c; font-size:.93rem; }
+.hobby-row{ display:flex; gap:.9rem; margin-top:1.2rem; flex-wrap:wrap; }
+.hobby-tile{
+  flex:1; min-width:120px; background:var(--surface-alt); border:1px solid var(--line);
+  border-radius:var(--radius-sm); padding:1rem; text-align:center;
+}
+.hobby-tile svg{ width:24px; height:24px; color:var(--primary); margin-bottom:.4rem; }
+.hobby-tile span{ display:block; font-size:.86rem; font-weight:600; }
+
+/* =====================================================================
+   CONTACT / FOOTER
+   ===================================================================== */
+#contact{
+  background:var(--primary-dark); color:#eafaf7; text-align:center;
+}
+#contact .section-head h2, #contact .eyebrow{ color:#eafaf7; }
+#contact .eyebrow{ color:#8fd8cd; }
+#contact .section-head p{ color:#bfe4de; }
+.social-row{ display:flex; justify-content:center; gap:.9rem; flex-wrap:wrap; margin:2rem 0; }
+.social-btn{
+  width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.18);
+  display:flex; align-items:center; justify-content:center;
+}
+.social-btn svg{ width:20px; height:20px; color:#eafaf7; }
+.social-btn:hover{ background:var(--primary-light); }
+#contact .btn-primary{ background:var(--primary-light); }
+#contact .btn-primary:hover{ background:#20b3a6; }
+.site-footer{
+  background:var(--primary-dark); color:#8fd8cd; text-align:center;
+  font-size:.78rem; padding:1.2rem 1.5rem 2rem; font-family:var(--font-mono);
+}
+.site-footer a{ color:#c8ebe5; }
+
+/* =====================================================================
+   RESPONSIVE
+   ===================================================================== */
+@media (max-width:820px){
+  .about-grid, .edu-grid, .beyond-grid{ grid-template-columns:1fr; }
+}
+@media (max-width:700px){
+  .nav-links{
+    position:absolute; top:100%; left:0; right:0; background:var(--surface);
+    flex-direction:column; padding:1rem 1.5rem; border-bottom:1px solid var(--line);
+    display:none; gap:1rem;
+  }
+  .nav-links.open{ display:flex; }
+  .nav-toggle{ display:block; }
+  section{ padding:3.4rem 1.2rem; }
+}
+
+/* =====================================================================
+   PRINT / "DOWNLOAD PDF"
+   ===================================================================== */
+@media print{
+  .site-header, .nav-toggle, .hero-cta, #contact, .site-footer, .tile-hint{ display:none !important; }
+  body{ background:#fff; }
+  section{ padding:1rem 0; }
+  .hero-cover{ height:120px; }
+  .hero-card{ margin-top:-40px; }
+  .avatar{ width:90px; height:90px; }
+  .t-card, .edu-card, .honor-card{ box-shadow:none; break-inside:avoid; }
+  .skill-tile-inner{ transform:none !important; }
+  .skill-tile-back{ display:none; }
+  a{ color:var(--ink); text-decoration:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hidden icon sprite — do not delete. Icons are referenced with <use href="#icon-name"> -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="icon-chip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="12" height="12" rx="1.5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+  <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="8" y="8" width="8" height="8" rx="1"/><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/></symbol>
+  <symbol id="icon-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></symbol>
+  <symbol id="icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 9l4 3-4 3M13 15h5"/></symbol>
+  <symbol id="icon-git" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="9" r="2.4"/><path d="M6 8.4V15.6M6 8.4C6 12 9.5 12 12 12c3 0 6 0 6-3"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="icon-wifi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8.5a16 16 0 0120 0M5.5 12.5a11 11 0 0113 0M9 16.5a5.5 5.5 0 016 0"/><circle cx="12" cy="20" r="1"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 16.5l9 5 9-5"/></symbol>
+  <symbol id="icon-db" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="icon-wave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12h3l2-7 4 14 3-11 2 4h6"/></symbol>
+  <symbol id="icon-tool" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a4 4 0 015.6 5.6l-7 7a4 4 0 01-5.6-5.6M4 20l4-4"/></symbol>
+  <symbol id="icon-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2M2 12h20"/></symbol>
+  <symbol id="icon-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v6"/></symbol>
+  <symbol id="icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22s7-7.4 7-12a7 7 0 10-14 0c0 4.6 7 12 7 12z"/><circle cx="12" cy="10" r="2.4"/></symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 3h4l2 5-2.5 1.5a12 12 0 006 6L15 13l5 2v4a2 2 0 01-2 2C9 21 3 15 3 6a2 2 0 011-3z"/></symbol>
+  <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></symbol>
+  <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></symbol>
+  <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4 0 4.75 2.6 4.75 6.1V21h-4v-5.6c0-1.35-.02-3.1-1.9-3.1-1.9 0-2.2 1.48-2.2 3v5.7H9z"/></symbol>
+  <symbol id="icon-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5a10.5 10.5 0 00-3.32 20.47c.52.1.72-.23.72-.5v-1.95c-2.94.64-3.56-1.24-3.56-1.24-.48-1.22-1.18-1.55-1.18-1.55-.96-.66.07-.64.07-.64 1.06.08 1.62 1.1 1.62 1.1.95 1.62 2.48 1.15 3.08.88.1-.69.37-1.15.68-1.42-2.35-.27-4.82-1.18-4.82-5.24 0-1.16.4-2.1 1.06-2.85-.1-.27-.46-1.35.1-2.82 0 0 .87-.28 2.85 1.08a9.7 9.7 0 015.2 0c1.98-1.36 2.85-1.08 2.85-1.08.56 1.47.2 2.55.1 2.82.66.75 1.06 1.7 1.06 2.85 0 4.07-2.48 4.97-4.84 5.23.38.33.72.98.72 1.98v2.94c0 .28.2.6.72.5A10.5 10.5 0 0012 1.5z"/></symbol>
+  <symbol id="icon-scholar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 8l11 6 9-4.9V17h2V8L12 2zM5 12.2V16c0 2.2 3.1 4 7 4s7-1.8 7-4v-3.8l-7 3.8-7-3.8z"/></symbol>
+  <symbol id="icon-brush" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 3l6 6-8.5 8.5a3 3 0 01-2 .9H7l.6-3.5a3 3 0 01.9-1.9L15 3z"/><path d="M3 21c1-3 2-4 4-4"/></symbol>
+  <symbol id="icon-fist" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 10V6a2 2 0 014 0v3M11 9V5a2 2 0 014 0v4M15 9.5V6a2 2 0 014 0v7c0 3.9-3.1 7-7 7h-1c-3 0-4.5-1.3-6-3.5L3 13c-.6-1 .2-2 1.2-1.7L7 12"/></symbol>
+  <symbol id="icon-dumbbell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10v4M22 10v4M5 8v8M19 8v8M5 12h14"/></symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+</svg>
+
+<!-- ===== HEADER / NAVIGATION ===== -->
+<header class="site-header">
+  <nav class="nav">
+    <a href="#home" class="nav-brand"><span class="mark">AR</span> Ali Roozbehani</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg><use href="#icon-menu"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main>
+<!-- ===== SECTION: HERO — EDIT: name, title, photo, location, links ===== -->
+<section id="home" class="hero">
+  <div class="hero-cover">
+    <!-- Decorative circuit-trace background pattern. Purely visual — safe to leave as is. -->
+    <svg class="trace-pattern" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="#0b6e66" stroke-width="1.4" opacity="0.35">
+        <path d="M0 60 H180 V20 H420 V90 H620 V40 H900 V120 H1200"/>
+        <path d="M0 180 H140 V220 H340 V160 H560 V240 H820 V190 H1050 V260 H1200"/>
+        <path d="M0 280 H240 V300 H480"/>
+      </g>
+      <g fill="#0b6e66" opacity="0.5">
+        <circle cx="180" cy="60" r="4"/><circle cx="420" cy="20" r="4"/><circle cx="620" cy="90" r="4"/>
+        <circle cx="900" cy="40" r="4"/><circle cx="140" cy="180" r="4"/><circle cx="340" cy="220" r="4"/>
+        <circle cx="560" cy="160" r="4"/><circle cx="820" cy="240" r="4"/><circle cx="1050" cy="190" r="4"/>
+      </g>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-card">
+      <!-- EDIT: replace this SVG with <img class="avatar" src="your-photo.jpg" alt="Ali Roozbehani"> to use a real photo -->
+      <svg class="avatar" viewBox="0 0 132 132" role="img" aria-label="Profile photo placeholder">
+        <defs><linearGradient id="avgrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#17a398"/><stop offset="1" stop-color="#084f4a"/>
+        </linearGradient></defs>
+        <circle cx="66" cy="66" r="66" fill="url(#avgrad)"/>
+        <text x="50%" y="56%" text-anchor="middle" dy=".05em" font-family="Space Grotesk, sans-serif" font-size="46" fill="#eafaf7" font-weight="600">AR</text>
+      </svg>
+      <div class="hero-text">
+        <h1>Ali Roozbehani</h1>
+        <div class="hero-role">Embedded Systems Engineer &amp; Electronics Researcher</div>
+        <div class="hero-meta">
+          <span><svg><use href="#icon-pin"/></svg> Tehran, Iran</span>
+          <span><svg><use href="#icon-mail"/></svg> ali.roozbehani@gmail.com</span>
+          <span><svg><use href="#icon-phone"/></svg> +98 903 456 2040</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn btn-primary" id="downloadPdfTop"><svg><use href="#icon-download"/></svg> Download PDF</button>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION: ABOUT — EDIT: rewrite this summary in your own words ===== -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Profile</div>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Ali is an embedded systems engineer and electronics researcher based in Tehran, working at the intersection of low-level firmware, real-time operating systems, and human-machine interfaces. His day-to-day spans processor and MCU hardware design, multi-threaded RTOS programming, and Linux-based UI frameworks built with LVGL — with a habit of writing documentation that explains the reasoning, not just the rules.</p>
+        <p>Alongside his engineering work, Ali has spent over a decade in academic research on EEG-based brain-computer interfaces, contributing to a national patent for EEG-controlled wheelchair navigation and presenting at international neuroscience conferences. He also consults on ISO 13485 quality-management implementation for biomedical device manufacturers.</p>
+        <p>He holds an M.Sc. in Electronic Engineering from Shahid Beheshti University and a B.Sc. from K. N. Toosi University of Technology, both in Tehran.</p>
+      </div>
+      <div class="about-facts">
+        <div class="fact"><svg><use href="#icon-briefcase"/></svg><div><b>Current Role</b><span>Researcher, Designer &amp; Project Manager — Iran Communication Industries Co.</span></div></div>
+        <div class="fact"><svg><use href="#icon-cap"/></svg><div><b>Education</b><span>M.Sc. Electronic Engineering, Shahid Beheshti University</span></div></div>
+        <div class="fact"><svg><use href="#icon-wave"/></svg><div><b>Research Focus</b><span>Embedded systems, RTOS, brain-computer interfaces</span></div></div>
+        <div class="fact"><svg><use href="#icon-shield"/></svg><div><b>Languages</b><span>Persian (native), English (professional working)</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION: SKILLS — EDIT: tiles are grouped below; click a tile to flip it =====
+     To add a tile: copy one <li class="skill-tile">…</li> block and edit the icon id,
+     the visible name, and the short text on the back. -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Toolbox</div>
+      <h2>Skills</h2>
+      <p>Click any tile to flip it and see a quick note.</p>
+    </div>
+
+    <div class="skills-group">
+      <h3>Embedded &amp; Firmware</h3>
+      <ul class="tile-grid">
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-code"/></svg><span>C / C++</span></div>
+          <div class="skill-tile-back">Primary language for firmware, drivers &amp; embedded Linux apps.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-cpu"/></svg><span>RTOS Programming</span></div>
+          <div class="skill-tile-back">Multi-thread &amp; multi-task design, incl. FreeRTOS.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-chip"/></svg><span>ARM / AVR / MSP430 / PIC</span></div>
+          <div class="skill-tile-back">MCU hardware &amp; low-level programming across families.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-terminal"/></svg><span>Embedded Linux</span></div>
+          <div class="skill-tile-back">Custom UI stacks, sysfs, device bring-up &amp; debugging.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-tool"/></svg><span>Assembly</span></div>
+          <div class="skill-tile-back">Register-level programming for MCU targets.</div>
+        </div></li>
+      </ul>
+    </div>
+
+    <div class="skills-group">
+      <h3>Hardware &amp; EDA</h3>
+      <ul class="tile-grid">
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-layers"/></svg><span>Altium Designer</span></div>
+          <div class="skill-tile-back">Schematic capture &amp; PCB layout.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-layers"/></svg><span>OrCAD / Cadence</span></div>
+          <div class="skill-tile-back">PCB design, 2013–2014 specialization.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-wave"/></svg><span>HSpice</span></div>
+          <div class="skill-tile-back">Analog / mixed-signal circuit simulation.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-chip"/></svg><span>VHDL</span></div>
+          <div class="skill-tile-back">Digital IC / integrated circuit design.</div>
+        </div></li>
+      </ul>
+    </div>
+
+    <div class="skills-group">
+      <h3>Software &amp; Tools</h3>
+      <ul class="tile-grid">
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-git"/></svg><span>Git &amp; GitLab CI/CD</span></div>
+          <div class="skill-tile-back">Git Flow workflows; authored an 11-doc team guideline set.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-layers"/></svg><span>LVGL UI</span></div>
+          <div class="skill-tile-back">Menu engines, theming, custom widgets in LVGL v9.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-db"/></svg><span>SQLite</span></div>
+          <div class="skill-tile-back">Schema design, migrations &amp; query optimization.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-tool"/></svg><span>CMake</span></div>
+          <div class="skill-tile-back">Layered build systems &amp; app/target auto-detection.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-wifi"/></svg><span>PulseAudio / ALSA</span></div>
+          <div class="skill-tile-back">Audio HAL backends, PTT loopback, procedural sound synthesis.</div>
+        </div></li>
+      </ul>
+    </div>
+
+    <div class="skills-group">
+      <h3>Networking, Security &amp; Voice</h3>
+      <ul class="tile-grid">
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-wifi"/></svg><span>CCNA Network / Voice</span></div>
+          <div class="skill-tile-back">Certified 2014–2015.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-shield"/></svg><span>CEH</span></div>
+          <div class="skill-tile-back">Certified Ethical Hacker, 2019.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-shield"/></svg><span>CWSP</span></div>
+          <div class="skill-tile-back">Certified Wireless Security Professional, 2017.</div>
+        </div></li>
+        <li class="skill-tile" tabindex="0" role="button"><div class="skill-tile-inner">
+          <div class="skill-tile-front"><svg><use href="#icon-wifi"/></svg><span>Asterisk / VoIP</span></div>
+          <div class="skill-tile-back">IP-phone menu, UI &amp; codec / voice-path management.</div>
+        </div></li>
+      </ul>
+    </div>
+    <p class="tile-hint">Tip — on mobile, tap a tile instead of clicking.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION: EXPERIENCE (timeline) — EDIT: add a new <li class="t-item"> to add a role ===== -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Career</div>
+      <h2>Experience</h2>
+    </div>
+    <ul class="timeline">
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Researcher, Designer &amp; Project Manager</h3><span class="t-date">Oct 2011 — Present</span></div>
+          <div class="t-org">Iran Communication Industries Co. · Tehran, Iran</div>
+          <ul>
+            <li>Hardware design of processors and MCUs; PCB design</li>
+            <li>Low-level programming in C and assembly; multi-thread RTOS programming</li>
+            <li>IP-phone menu &amp; UI design, codec and voice-path management</li>
+            <li>Project management, testing and debugging</li>
+          </ul>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Technical Supervisor &amp; ISO 13485 Consultant</h3><span class="t-date">2017 — Present</span></div>
+          <div class="t-org">For ~10 biomedical engineering companies · Tehran, Iran</div>
+          <ul>
+            <li>Implementing IRAN Medical Equipment Organization criteria</li>
+            <li>Developing controls for outsourced resources, imported parts, sterilization and final-product packaging aligned with quality-management standards</li>
+          </ul>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Designer</h3><span class="t-date">Jan 2008 — Jan 2011</span></div>
+          <div class="t-org">Yar Nikan Saleh · Tehran, Iran</div>
+          <ul>
+            <li>Mechanical and electronic design of deposition / vacuum systems</li>
+            <li>Pirani vacuum gauge design, assembly and testing</li>
+          </ul>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Research Assistant</h3><span class="t-date">2011</span></div>
+          <div class="t-org">Shahid Beheshti University · Tehran, Iran</div>
+          <ul><li>Producing a level shifter under the supervision of Dr. O. Hashemipour Tafreshi</li></ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== SECTION: PROJECTS (timeline) — EDIT: swap in your own project write-ups ===== -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Selected Work</div>
+      <h2>Projects</h2>
+    </div>
+    <ul class="timeline">
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>DMR / PTT Radio Control Panel UI</h3><span class="t-date">Ongoing</span></div>
+          <p>Long-running LVGL v9 project: procedural PCM sound engine with ADSR envelopes, a virtual screen subsystem, a settings-menu engine with clean data/logic separation, and a full home-page UI for a DMR/PTT radio device.</p>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Four-Way Controllable BCI Wheelchair <span class="badge patent">Patent · 2023</span></h3><span class="t-date">2023</span></div>
+          <p>Co-invented a national patent for a wheelchair controllable via processed EEG motion-perception signals, simultaneously with a joystick — building on years of motor-imagery BCI research.</p>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Battery Management &amp; Sound-Alert System</h3><span class="t-date">Recent</span></div>
+          <p>Fixed a charger-detection bug caused by Linux sysfs reporting differences, and added edge-detected, hysteresis-based sound alerts for charger plug/unplug and low-battery events across the HAL, sound engine and home UI.</p>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>GitLab Development Workflow Guidelines</h3><span class="t-date">Recent</span></div>
+          <p>Authored an 11-document Git Flow–based guideline set for a mixed embedded/hardware/software team — covering ECN/ECO hardware change control, CODEOWNERS and requirements traceability — with Mermaid diagrams and a full Persian translation.</p>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Contacts List UI</h3><span class="t-date">Recent</span></div>
+          <p>Android-style contacts UI (LVGL) with lazy loading, inline search, multi-select actions and a router-centric navigation model; resolved schema and UTF-8 handling bugs and a LIKE-injection vulnerability.</p>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>embui_framework — Layered UI Architecture</h3><span class="t-date">Earlier</span></div>
+          <p>Migrated a flat project into a layered embedded UI framework with a CMake auto-detection system for switching between user-app and default-app targets.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== SECTION: PUBLICATIONS (timeline) ===== -->
+<section id="publications" style="background:var(--surface)">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Research</div>
+      <h2>Publications</h2>
+    </div>
+    <ul class="timeline">
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Applying More Efficient Methods to an EEG-Driven BCI Smart Wheelchair <span class="badge progress">In Preparation</span></h3></div>
+          <div class="t-org">M. Ghafouri, A. Roozbahani, A. Fallah</div>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Comparison and Boosting of EEG Motor-Imagery Signal Decomposition <span class="badge poster">Poster</span></h3><span class="t-date">2023</span></div>
+          <div class="t-org">11th IBRO World Congress of Neuroscience, Granada, Spain</div>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Compatibility of Hindmarch–Rose and Chay Models with Biological Experiment <span class="badge poster">Poster</span></h3><span class="t-date">2023</span></div>
+          <div class="t-org">11th IBRO World Congress of Neuroscience, Granada, Spain</div>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Challenges in Brain-Computer Interface Using Real-Time EEG <span class="badge poster">Poster</span></h3><span class="t-date">2023</span></div>
+          <div class="t-org">11th International Conference — Aspects of Neuroscience, Warsaw, Poland</div>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Motor Imagery EEG-Based Control of a Semi-Online Wheelchair (ADABOOST + OVO-SVCSP) <span class="badge oral">Oral</span></h3><span class="t-date">2022 · Helsinki-Espoo 2023</span></div>
+          <div class="t-org">9th Int'l Conference of Cognitive Science, Tehran (ICCS 2022); accepted at BrainSTM 2023</div>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>Applying EEG Motor Imagery Signals to Control a Wheelchair <span class="badge oral">Oral</span></h3><span class="t-date">2021</span></div>
+          <div class="t-org">10th Basic and Clinical Neuroscience Congress, Tehran (BCNC 2021)</div>
+        </div>
+      </li>
+      <li class="t-item">
+        <span class="t-node"></span>
+        <div class="t-card">
+          <div class="t-top"><h3>A Modified Structure for High-Speed, Low-Overshoot Comparator-Based Switched-Capacitor Integrator <span class="badge oral">Oral</span></h3><span class="t-date">2013</span></div>
+          <div class="t-org">21st Iranian Conference on Electrical Engineering</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===== SECTION: EDUCATION ===== -->
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Academic Background</div>
+      <h2>Education</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <span class="t-date">Oct 2010 — Sep 2012</span>
+        <h3>M.Sc. Electrical Engineering (Electronics)</h3>
+        <div class="t-org">Shahid Beheshti University, Tehran, Iran</div>
+        <p>Thesis: Improving the performance of the comparator-based switched-capacitor integrator, under supervision of Dr. O. Hashemipour Tafreshi.</p>
+        <span class="gpa">GPA 17.13 / 20 (3.78 / 4)</span>
+      </div>
+      <div class="edu-card">
+        <span class="t-date">Oct 2006 — Sep 2010</span>
+        <h3>B.Sc. Electrical Engineering (Electronics)</h3>
+        <div class="t-org">K. N. Toosi University of Technology, Tehran, Iran</div>
+        <p>Thesis: Design and implementation of the receiver for a multi-channel EEG system based on TDMA architecture, with UI — under supervision of Dr. A. M. Sodagar.</p>
+        <span class="gpa">GPA 16.15 / 20 (3.59 / 4)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION: CERTIFICATIONS ===== -->
+<section id="certifications" style="background:var(--surface); padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Continuing Education</div>
+      <h2>Courses &amp; Certifications</h2>
+    </div>
+    <div class="cert-cloud">
+      <span class="cert-chip">BCI &amp; Neurotechnology Spring School · 2021–23</span>
+      <span class="cert-chip">Advanced Embedded Linux · 2021–22</span>
+      <span class="cert-chip">Project Management (PMBOK) · 2021</span>
+      <span class="cert-chip">CEH · 2019</span>
+      <span class="cert-chip">CWSP · 2017</span>
+      <span class="cert-chip">Embedded Programming · 2016–17</span>
+      <span class="cert-chip">CCNA-Voice · 2015</span>
+      <span class="cert-chip">CCNA-Network · 2014–15</span>
+      <span class="cert-chip">OrCAD Cadence PCB Design · 2013–14</span>
+      <span class="cert-chip">Network+ · 2011</span>
+      <span class="cert-chip">ISO 13485 &amp; ISO 9001 Internal Audit · 2023</span>
+      <span class="cert-chip">ISO 13485 &amp; ISO 14971 Awareness · 2022</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION: BEYOND WORK (honors + hobbies) ===== -->
+<section id="beyond">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">A Little More</div>
+      <h2>Beyond Work</h2>
+    </div>
+    <div class="beyond-grid">
+      <div>
+        <div class="honor-card">
+          <svg><use href="#icon-award"/></svg>
+          <p><strong>2nd rank</strong> among all students admitted to the M.Sc. Electronic Engineering program, 2013.</p>
+        </div>
+      </div>
+      <div>
+        <div class="hobby-row">
+          <div class="hobby-tile"><svg><use href="#icon-brush"/></svg><span>Calligraphy</span></div>
+          <div class="hobby-tile"><svg><use href="#icon-fist"/></svg><span>Taekwondo</span></div>
+          <div class="hobby-tile"><svg><use href="#icon-dumbbell"/></svg><span>Bodybuilding</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION: CONTACT / SOCIAL — EDIT: put your real profile links in the href="" values ===== -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Let's Connect</div>
+      <h2>Get in Touch</h2>
+      <p>Open to conversations about embedded systems, RTOS, UI engineering, and brain-computer interface research.</p>
+    </div>
+    <div class="social-row">
+      <a class="social-btn" href="mailto:ali.roozbehani@gmail.com" aria-label="Email"><svg><use href="#icon-mail"/></svg></a>
+      <a class="social-btn" href="tel:+989034562040" aria-label="Phone"><svg><use href="#icon-phone"/></svg></a>
+      <!-- EDIT: replace # with your real LinkedIn / GitHub / Google Scholar URLs -->
+      <a class="social-btn" href="#" target="_blank" rel="noopener" aria-label="LinkedIn"><svg><use href="#icon-linkedin"/></svg></a>
+      <a class="social-btn" href="#" target="_blank" rel="noopener" aria-label="GitHub"><svg><use href="#icon-github"/></svg></a>
+      <a class="social-btn" href="#" target="_blank" rel="noopener" aria-label="Google Scholar"><svg><use href="#icon-scholar"/></svg></a>
+    </div>
+    <button class="btn btn-primary" id="downloadPdfBottom"><svg><use href="#icon-download"/></svg> Download resume as PDF</button>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <p>&copy; <span id="year"></span> Ali Roozbehani · Tehran, Iran · Built with plain HTML &amp; CSS</p>
+</footer>
+
+<script>
+/* =====================================================================
+   3. SCRIPT — small, dependency-free behaviors. No build tools needed.
+   ===================================================================== */
+
+// Mobile menu toggle
+var navToggle = document.getElementById('navToggle');
+var navLinks  = document.getElementById('navLinks');
+navToggle.addEventListener('click', function(){
+  var isOpen = navLinks.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  navToggle.innerHTML = isOpen ? '<svg><use href="#icon-close"/></svg>' : '<svg><use href="#icon-menu"/></svg>';
+});
+// Close mobile menu after choosing a link
+navLinks.querySelectorAll('a').forEach(function(a){
+  a.addEventListener('click', function(){
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+    navToggle.innerHTML = '<svg><use href="#icon-menu"/></svg>';
+  });
+});
+
+// Skill tiles: click or press Enter/Space to flip
+document.querySelectorAll('.skill-tile').forEach(function(tile){
+  function flip(){ tile.classList.toggle('flipped'); }
+  tile.addEventListener('click', flip);
+  tile.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); flip(); }
+  });
+});
+
+// "Download PDF" buttons -> use the browser's built-in print-to-PDF
+function printPage(){ window.print(); }
+document.getElementById('downloadPdfTop').addEventListener('click', printPage);
+document.getElementById('downloadPdfBottom').addEventListener('click', printPage);
+
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
